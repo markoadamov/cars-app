@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import carsService from "../services/CarsService";
 
 export default function AddCar() {
-  const [newCar, setNewCar] = useState({
+  let defaulFormState = {
     brand: "",
     model: "",
     year: "",
@@ -10,19 +10,18 @@ export default function AddCar() {
     numberOfDoors: 4,
     isAutomatic: false,
     engine: "",
-  });
+  };
 
-  let years_list = [];
+  const [newCar, setNewCar] = useState(defaulFormState);
 
-  for (let i = 1990; i <= 2018; i++) {
-    years_list.push(i);
-  }
+  let years_list = Array.from({ length: 29 }, (_, i) => 1990+i);
 
-  const handleSubmitCar = (e) => {
-    e.preventDefault();
-
-    console.log(newCar);
+  const handleSubmitCar = () => {
     carsService.Add(newCar);
+  };
+
+  const handleReset = () => {
+    setNewCar(defaulFormState);
   };
 
   function assignSelectedYear(e) {
@@ -31,7 +30,11 @@ export default function AddCar() {
 
   return (
     <div className="AddCar">
-      <form onSubmit={handleSubmitCar}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <label>Add Car:</label>
         <br />
         <input
@@ -151,7 +154,8 @@ export default function AddCar() {
           </div>
         </fieldset>
 
-        <button>Submit</button>
+        <button onClick={handleSubmitCar}>Submit</button>
+        <button type="reset" onClick={handleReset}>Reset</button>
       </form>
     </div>
   );
