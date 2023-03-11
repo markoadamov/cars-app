@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import carsService from "../services/CarsService";
+import { useHistory } from "react-router-dom";
 
 export default function AddCar() {
   let defaulFormState = {
@@ -12,12 +13,14 @@ export default function AddCar() {
     engine: "",
   };
 
+  let history = useHistory();
+
   const [newCar, setNewCar] = useState(defaulFormState);
 
-  let years_list = Array.from({ length: 29 }, (_, i) => 1990+i);
+  let years_list = Array.from({ length: 29 }, (_, i) => 1990 + i);
 
   const handleSubmitCar = () => {
-    carsService.Add(newCar);
+    carsService.Add(newCar, () => {history.push('/cars')});
   };
 
   const handleReset = () => {
@@ -25,7 +28,9 @@ export default function AddCar() {
   };
 
   const handlePreview = () => {
-    alert(`Brand: ${newCar.brand}\nModel: ${newCar.model}\nYear: ${newCar.year}\nMax Speed: ${newCar.maxSpeed}\nNumber Of Doors: ${newCar.numberOfDoors}\nAutomatic: ${newCar.isAutomatic}\nEngine: ${newCar.engine}`);
+    alert(
+      `Brand: ${newCar.brand}\nModel: ${newCar.model}\nYear: ${newCar.year}\nMax Speed: ${newCar.maxSpeed}\nNumber Of Doors: ${newCar.numberOfDoors}\nAutomatic: ${newCar.isAutomatic}\nEngine: ${newCar.engine}`
+    );
   };
 
   function assignSelectedYear(e) {
@@ -48,6 +53,7 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, brand: e.target.value });
           }}
+          required
         />
         <br />
         <input
@@ -57,6 +63,7 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, model: e.target.value });
           }}
+          required
         />
         <br />
         <br />
@@ -80,6 +87,7 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, numberOfDoors: Number(e.target.value) });
           }}
+          required
         />
         <br />
         <br />
@@ -97,10 +105,9 @@ export default function AddCar() {
           id="years"
           value={newCar.selectedYear}
           onChange={assignSelectedYear}
+          required
         >
-          <option value="">
-            Year
-          </option>
+          <option value="">Year</option>
           {years_list.map((year) => (
             <option key={year} value={year}>
               {year}
@@ -120,6 +127,7 @@ export default function AddCar() {
               onChange={(e) => {
                 setNewCar({ ...newCar, engine: e.target.value });
               }}
+              required
             />
             <label>Diesel</label>
 
@@ -159,7 +167,9 @@ export default function AddCar() {
         </fieldset>
 
         <button onClick={handleSubmitCar}>Submit</button>
-        <button type="reset" onClick={handleReset}>Reset</button>
+        <button type="reset" onClick={handleReset}>
+          Reset
+        </button>
         <button onClick={handlePreview}>Preview</button>
       </form>
     </div>
