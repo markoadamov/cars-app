@@ -7,6 +7,22 @@
   pointer-events: none;
 }
 
+.DivCarList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+th, td {
+  border: 1px solid black;
+}
+
+table {
+  border: 1px solid black;
+  width: 80%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
