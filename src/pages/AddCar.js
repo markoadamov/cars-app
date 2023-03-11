@@ -7,8 +7,8 @@ export default function AddCar() {
     brand: "",
     model: "",
     year: "",
-    maxSpeed: 0,
-    numberOfDoors: 4,
+    maxSpeed: "",
+    numberOfDoors: "",
     isAutomatic: false,
     engine: "",
   };
@@ -53,6 +53,7 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, brand: e.target.value });
           }}
+          minLength="2"
           required
         />
         <br />
@@ -63,6 +64,7 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, model: e.target.value });
           }}
+          minLength="2"
           required
         />
         <br />
@@ -81,7 +83,6 @@ export default function AddCar() {
         <label>Number of Doors:</label>
         <br />
         <input
-          placeholder="Number of Doors"
           type="number"
           value={newCar.numberOfDoors}
           onChange={(e) => {
