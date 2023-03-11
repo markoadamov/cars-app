@@ -6,6 +6,7 @@ class HttpsService {
     }
 }
 
+
 const httpService = new HttpsService();
 
 export default httpService;
