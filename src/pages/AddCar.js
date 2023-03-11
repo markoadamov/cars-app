@@ -24,6 +24,10 @@ export default function AddCar() {
     setNewCar(defaulFormState);
   };
 
+  const handlePreview = () => {
+    alert(`Brand: ${newCar.brand}\nModel: ${newCar.model}\nYear: ${newCar.year}\nMax Speed: ${newCar.maxSpeed}\nNumber Of Doors: ${newCar.numberOfDoors}\nAutomatic: ${newCar.isAutomatic}\nEngine: ${newCar.engine}`);
+  };
+
   function assignSelectedYear(e) {
     setNewCar({ ...newCar, year: Number(e.target.value) });
   }
@@ -94,8 +98,8 @@ export default function AddCar() {
           value={newCar.selectedYear}
           onChange={assignSelectedYear}
         >
-          <option disabled value="">
-            Select Year
+          <option value="">
+            Year
           </option>
           {years_list.map((year) => (
             <option key={year} value={year}>
@@ -156,6 +160,7 @@ export default function AddCar() {
 
         <button onClick={handleSubmitCar}>Submit</button>
         <button type="reset" onClick={handleReset}>Reset</button>
+        <button onClick={handlePreview}>Preview</button>
       </form>
     </div>
   );

@@ -2,10 +2,18 @@
   text-align: left;
 }
 
+body{
+  background-color: #1d1d1d;
+  color: white;
+}
+
 .AddCar {
   text-align: center;
 }
 
+button {
+  margin: 0.1rem;
+}
 .DivCarList {
   display: flex;
   align-items: center;
