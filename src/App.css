@@ -29,6 +29,21 @@ body{
   width: 100%;
 }
 
+.EditButton:hover{
+  width: 100%;
+  background-color: rgb(246, 246, 246);
+}
+
+.DeleteButton{
+  width: 100%;
+  color: white;
+  background-color: rgb(144, 0, 0);
+}
+
+.DeleteButton:hover{
+  background-color: rgb(179, 0, 0);
+}
+
 .DivCarList {
   display: flex;
   align-items: center;

@@ -14,5 +14,5 @@ export default function AppCars() {
     setCars(response.data);
   };
 
-  return <CarsList cars={cars} />;
+  return <CarsList cars={cars} setCars={setCars}/>;
 }
