@@ -3,7 +3,6 @@ import carsService from "../services/CarsService";
 import CarsList from "../components/CarsList";
 
 export default function AppCars() {
-
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
@@ -15,7 +14,5 @@ export default function AppCars() {
     setCars(response.data);
   };
 
-  return (
-    <CarsList cars={cars}/>
-  );
+  return <CarsList cars={cars} />;
 }

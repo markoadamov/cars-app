@@ -10,9 +10,13 @@ function App() {
         <div>
           <nav className="navigation">
             <div>
-              <Link to="/cars"><button>Cars</button></Link>
+              <Link to="/cars">
+                <button>Cars</button>
+              </Link>
               <label> || </label>
-              <Link to="/add"><button>Add Car</button></Link>
+              <Link to="/add">
+                <button>Add Car</button>
+              </Link>
             </div>
           </nav>
         </div>

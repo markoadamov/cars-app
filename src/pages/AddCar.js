@@ -25,9 +25,7 @@ export default function AddCar() {
   useEffect(() => {
     if (id) {
       handleGetCar();
-    }
-    else
-    {
+    } else {
       setNewCar(defaulFormState); // Ovo sam dodao zato sto bez toga forma ostaje ispunjena ako se ode sa /:id stranice na /add stranicu
     }
   }, [location]); // [location] je dodat zato sto ako je naveden prazan dependency niz, useEffect nece biti trigerovan kada se ode sa /:id stranice na /add
@@ -124,7 +122,7 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, isAutomatic: Boolean(e.target.checked) });
           }}
-          checked={newCar.isAutomatic===true&&true}
+          checked={newCar.isAutomatic === true && true}
         />
         <br />
         <label>Select Year: </label>
@@ -157,7 +155,7 @@ export default function AddCar() {
                     setNewCar({ ...newCar, engine: e.target.value });
                   }}
                   required={index === 0 && true}
-                  checked={engine_type===newCar.engine && true}
+                  checked={engine_type === newCar.engine && true}
                 ></input>
                 <label>{engine_type}</label>
               </div>
@@ -165,7 +163,10 @@ export default function AddCar() {
           </div>
         </fieldset>
 
-        <button className="FormButton" onClick={id?handleEditCar:handleAddCar}>
+        <button
+          className="FormButton"
+          onClick={id ? handleEditCar : handleAddCar}
+        >
           Submit
         </button>
         <button className="FormButton" type="reset" onClick={handleReset}>
