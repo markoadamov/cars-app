@@ -10,9 +10,9 @@ function App() {
         <div>
           <nav className="navigation">
             <div>
-              <Link to="/cars">Cars </Link>
+              <Link to="/cars"><button>Cars</button></Link>
               <label> || </label>
-              <Link to="/add">Add Car </Link>
+              <Link to="/add"><button>Add Car</button></Link>
             </div>
           </nav>
         </div>
@@ -24,6 +24,9 @@ function App() {
             <AppCars />
           </Route>
           <Route exact path="/add">
+            <AddCar />
+          </Route>
+          <Route path="/edit/:id">
             <AddCar />
           </Route>
         </Switch>

@@ -9,9 +9,18 @@ class CarsService {
     return await this.axios.get("/cars");
   }
 
-  async Add(car, redirect) {
+  async add(car, redirect) {
     await this.axios.post("/cars",car);
     redirect();
+  }
+
+  async edit (id, car, redirect) {
+    await this.axios.put(`/cars/${id}`,car);
+    redirect();
+  }
+
+  async get(id) {
+    return await this.axios.get(`/cars/${id}`);
   }
 }
 

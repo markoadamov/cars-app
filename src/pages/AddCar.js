@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import carsService from "../services/CarsService";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams, useLocation } from "react-router-dom";
 
 export default function AddCar() {
   let defaulFormState = {
@@ -15,12 +15,38 @@ export default function AddCar() {
 
   let history = useHistory();
 
+  const { id } = useParams();
+  const location = useLocation();
   const [newCar, setNewCar] = useState(defaulFormState);
 
   let years_list = Array.from({ length: 29 }, (_, i) => 1990 + i);
+  let engine_type_list = ["Diesel", "Petrol", "Electric", "Hybrid"];
 
-  const handleSubmitCar = () => {
-    carsService.Add(newCar, () => {history.push('/cars')});
+  useEffect(() => {
+    if (id) {
+      handleGetCar();
+    }
+    else
+    {
+      setNewCar(defaulFormState); // Ovo sam dodao zato sto bez toga forma ostaje ispunjena ako se ode sa /:id stranice na /add stranicu
+    }
+  }, [location]); // [location] je dodat zato sto ako je naveden prazan dependency niz, useEffect nece biti trigerovan kada se ode sa /:id stranice na /add
+
+  const handleGetCar = async () => {
+    const car = await carsService.get(id);
+    setNewCar(car.data);
+  };
+
+  const handleAddCar = () => {
+    carsService.add(newCar, () => {
+      history.push("/cars");
+    });
+  };
+
+  const handleEditCar = () => {
+    carsService.edit(id, newCar, () => {
+      history.push("/cars");
+    });
   };
 
   const handleReset = () => {
@@ -98,13 +124,14 @@ export default function AddCar() {
           onChange={(e) => {
             setNewCar({ ...newCar, isAutomatic: Boolean(e.target.checked) });
           }}
+          checked={newCar.isAutomatic===true&&true}
         />
         <br />
         <label>Select Year: </label>
         <select
           name="years"
           id="years"
-          value={newCar.selectedYear}
+          value={newCar.year}
           onChange={assignSelectedYear}
           required
         >
@@ -120,58 +147,33 @@ export default function AddCar() {
         <fieldset>
           <legend>Engine Type:</legend>
           <div>
-            <input
-              type="radio"
-              id="Diesel"
-              name="Engine"
-              value="Diesel"
-              onChange={(e) => {
-                setNewCar({ ...newCar, engine: e.target.value });
-              }}
-              required
-            />
-            <label>Diesel</label>
-
-            <input
-              type="radio"
-              id="Petrol"
-              name="Engine"
-              value="Petrol"
-              onChange={(e) => {
-                setNewCar({ ...newCar, engine: e.target.value });
-              }}
-            />
-            <label>Petrol</label>
-
-            <input
-              type="radio"
-              id="Electric"
-              name="Engine"
-              value="Electric"
-              onChange={(e) => {
-                setNewCar({ ...newCar, engine: e.target.value });
-              }}
-            />
-            <label>Electric</label>
-
-            <input
-              type="radio"
-              id="Hybrid"
-              name="Engine"
-              value="Hybrid"
-              onChange={(e) => {
-                setNewCar({ ...newCar, engine: e.target.value });
-              }}
-            />
-            <label>Hybrid</label>
+            {engine_type_list.map((engine_type, index) => (
+              <div key={engine_type} className="EngineTypeDiv">
+                <input
+                  name="Engine"
+                  type="radio"
+                  value={engine_type}
+                  onChange={(e) => {
+                    setNewCar({ ...newCar, engine: e.target.value });
+                  }}
+                  required={index === 0 && true}
+                  checked={engine_type===newCar.engine && true}
+                ></input>
+                <label>{engine_type}</label>
+              </div>
+            ))}
           </div>
         </fieldset>
 
-        <button onClick={handleSubmitCar}>Submit</button>
-        <button type="reset" onClick={handleReset}>
+        <button className="FormButton" onClick={id?handleEditCar:handleAddCar}>
+          Submit
+        </button>
+        <button className="FormButton" type="reset" onClick={handleReset}>
           Reset
         </button>
-        <button onClick={handlePreview}>Preview</button>
+        <button className="FormButton" onClick={handlePreview}>
+          Preview
+        </button>
       </form>
     </div>
   );

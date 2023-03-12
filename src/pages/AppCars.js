@@ -12,7 +12,6 @@ export default function AppCars() {
 
   const handleGetPosts = async () => {
     const response = await carsService.getAll();
-    console.log("Response:", response);
     setCars(response.data);
   };
 

@@ -1,6 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 export default function CarDetails({ car }) {
+  let history = useHistory();
+
   return (
     <tr>
       <td>{car.id}</td>
@@ -11,6 +14,7 @@ export default function CarDetails({ car }) {
       <td>{car.maxSpeed}</td>
       <td>{car.numberOfDoors}</td>
       <td>{car.year}</td>
+      <td onClick={()=>history.push(`/edit/${car.id}`)}><button className="EditButton">Edit</button></td>
     </tr>
   );
 }
