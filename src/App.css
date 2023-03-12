@@ -13,6 +13,16 @@ body{
   margin-bottom: 1rem;
 }
 
+.navigationButtons{
+  background-color: #646464;
+  color: white;
+}
+
+.navigationButtons:hover{
+  background-color: #8f8f8f;
+  color: white;
+}
+
 .AddCar {
   text-align: center;
 }

@@ -2,19 +2,24 @@ import React from "react";
 import CarDetails from "./CarDetails";
 import carsService from "../services/CarsService";
 
-export default function CarsList({ cars, setCars}) {
+export default function CarsList({ cars, setCars }) {
 
   const handleDelete = async (id) => {
-    let result = await carsService.delete(id);
     let carsUpdate = [];
-    
-    if(result)
-    {
-      carsUpdate = cars.filter((car) => car.id !== id)
-      setCars(carsUpdate);
+    const decision = window.confirm("Are you sure you want to delete?");
+
+    function updateFrontEnd(result) {
+      if (result) {
+        carsUpdate = cars.filter((car) => car.id !== id);
+        setCars(carsUpdate);
+      }
     }
-    //console.log(result);
-  }
+
+    if (decision) {
+      let result = await carsService.delete(id);
+      updateFrontEnd(result);
+    }
+  };
 
   return (
     <div className="DivCarList">
@@ -33,7 +38,7 @@ export default function CarsList({ cars, setCars}) {
         </thead>
         <tbody>
           {cars.map((car) => (
-            <CarDetails key={car.id} car={car} handleDelete={handleDelete}/>
+            <CarDetails key={car.id} car={car} handleDelete={handleDelete} />
           ))}
         </tbody>
       </table>

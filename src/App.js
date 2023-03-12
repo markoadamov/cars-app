@@ -11,11 +11,11 @@ function App() {
           <nav className="navigation">
             <div>
               <Link to="/cars">
-                <button>Cars</button>
+                <button className="navigationButtons">Cars</button>
               </Link>
               <label> || </label>
               <Link to="/add">
-                <button>Add Car</button>
+                <button className="navigationButtons">Add Car</button>
               </Link>
             </div>
           </nav>
@@ -24,10 +24,10 @@ function App() {
           <Route exact path="/">
             <Redirect to="/cars" />
           </Route>
-          <Route exact path="/cars">
+          <Route path="/cars">
             <AppCars />
           </Route>
-          <Route exact path="/add">
+          <Route path="/add">
             <AddCar />
           </Route>
           <Route path="/edit/:id">
