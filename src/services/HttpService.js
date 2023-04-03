@@ -1,11 +1,35 @@
 import axios from "axios";
 
-class HttpsService {
-    constructor(){
-        this.axiosInstance = axios.create({baseURL: "http://localhost:3000/api"})
-    }
+export default class HttpService {
+  constructor() {
+    this.client = axios.create({
+      baseURL: "http://localhost:8000/api",
+    });
+
+    this.client.interceptors.request.use(function (req) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        req.headers["Authorization"] = `Bearer ${token}`;
+      }
+      return req;
+    });
+  }
 }
 
-const httpService = new HttpsService();
+// import axios from "axios";  // Ovo je staro/prethodno sto sam radio
 
-export default httpService;
+// class HttpsService {
+//     constructor(){
+//         this.axiosInstance = axios.create({baseURL: "http://localhost:3000/api"})
+//     }
+// }
+
+// const httpService = new HttpsService();
+
+// export default httpService;  // Ovo je staro/prethodno sto sam radio
+
+
+
+
+
+

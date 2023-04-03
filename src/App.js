@@ -1,40 +1,43 @@
+import { useState } from "react";
 import "./App.css";
-import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
-import AppCars from "./pages/AppCars";
-import AddCar from "./pages/AddCar";
+// import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
+import Page from "./layout/Page";
+import Router from "./Router";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
+
   return (
+    // <div className="App">
+    //   <BrowserRouter>
+    //     <div>
+    //       <nav className="navigation">
+    //         <div>
+    //          ...
+    //           <label> || </label>
+    //           <Link to="/add">
+    //             <button className="navigationButtons">Add Car</button>
+    //           </Link>
+    //         </div>
+    //       </nav>
+    //     </div>
+    //     <Switch>
+    //       ...
+    //       <Route path="/edit/:id">
+    //         <AddCar />
+    //       </Route>
+    //     </Switch>
+    //   </BrowserRouter>  // BroswerRouter tagovi se prebace u index.js kada se koristi layout
+    // </div>
     <div className="App">
-      <BrowserRouter>
-        <div>
-          <nav className="navigation">
-            <div>
-              <Link to="/cars">
-                <button className="navigationButtons">Cars</button>
-              </Link>
-              <label> || </label>
-              <Link to="/add">
-                <button className="navigationButtons">Add Car</button>
-              </Link>
-            </div>
-          </nav>
-        </div>
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/cars" />
-          </Route>
-          <Route path="/cars">
-            <AppCars />
-          </Route>
-          <Route path="/add">
-            <AddCar />
-          </Route>
-          <Route path="/edit/:id">
-            <AddCar />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+        <Page
+          isAuthenticated={isAuthenticated}
+          setIsAuthenticated={setIsAuthenticated}
+        >
+          <Router setIsAuthenticated={setIsAuthenticated} />
+        </Page>
     </div>
   );
 }

@@ -12,9 +12,9 @@ export default function AddCar() {
     brand: "",
     model: "",
     year: "",
-    maxSpeed: "",
-    numberOfDoors: "",
-    isAutomatic: false,
+    max_speed: "",
+    number_of_doors: "",
+    is_automatic: false,
     engine: "",
   };
 

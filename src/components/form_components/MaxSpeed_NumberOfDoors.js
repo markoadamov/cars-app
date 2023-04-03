@@ -7,9 +7,9 @@ export default function MaxSpeed_NumberOfDoors({ newCar, setNewCar }) {
       <br />
       <input
         type="number"
-        value={newCar.maxSpeed}
+        value={newCar.max_speed}
         onChange={(e) => {
-          setNewCar({ ...newCar, maxSpeed: Number(e.target.value) });
+          setNewCar({ ...newCar, max_speed: Number(e.target.value) });
         }}
       />
       <br />
@@ -18,9 +18,9 @@ export default function MaxSpeed_NumberOfDoors({ newCar, setNewCar }) {
       <br />
       <input
         type="number"
-        value={newCar.numberOfDoors}
+        value={newCar.number_of_doors}
         onChange={(e) => {
-          setNewCar({ ...newCar, numberOfDoors: Number(e.target.value) });
+          setNewCar({ ...newCar, number_of_doors: Number(e.target.value) });
         }}
         required
       />

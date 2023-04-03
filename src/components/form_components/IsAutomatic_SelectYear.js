@@ -13,9 +13,9 @@ export default function IsAutomatic_SelectYear({ newCar, setNewCar }) {
       <input
         type="checkbox"
         onChange={(e) => {
-          setNewCar({ ...newCar, isAutomatic: Boolean(e.target.checked) });
+          setNewCar({ ...newCar, is_automatic: Boolean(e.target.checked) });
         }}
-        checked={newCar.isAutomatic === true && true}
+        checked={newCar.is_automatic === true && true}
       />
       <br />
       <label>Select Year: </label>
